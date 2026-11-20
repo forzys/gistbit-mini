@@ -29,17 +29,141 @@
     "tools": [
         {
             "dev": true,
-            "id": "dev-polish-email",
             "type": "prompt",
             "group": "ai",
-            "icon": "envelope",
+            "id": "summarize-points",
+            "icon": "list.bullet.rectangle",
+            "input": "item",
+            "output": "note",
             "title": {
-                "zh": "邮件润色（测试）",
-                "en": "Polish Email (Test)"
+                "zh": "整理要点",
+                "en": "Key Points"
             },
+            "subtitle": {
+                "zh": "资料整理成要点笔记",
+                "en": "Turn an item into a note of key points"
+            },
+            "prompt": "把下面的资料整理成 5 到 8 条要点。每条一句话，按原文的顺序排列，不要加原文没有的内容。用{{language}}写。\n{{input}}"
+        },
+        {
+            "dev": true,
+            "type": "prompt",
+            "group": "ai",
+            "id": "make-quiz",
+            "icon": "checklist",
+            "input": "item",
+            "output": "text",
+            "title": {
+                "zh": "出几道题",
+                "en": "Make a Quiz"
+            },
+            "subtitle": {
+                "zh": "根据资料出选择题",
+                "en": "Multiple-choice questions from an item"
+            },
+            "prompt": "根据下面的资料出 5 道单选题。每题 4 个选项（A–D），只有一个正确；每题后面写出正确答案和一句话解析。题目只考资料里有的内容。用{{language}}写。\n{{input}}"
+        },
+        {
+            "dev": true,
+            "type": "prompt",
+            "group": "ai",
+            "id": "explain-concept",
+            "icon": "lightbulb",
             "input": "text",
             "output": "text",
-            "prompt": "把下面的内容改写成礼貌、简洁的邮件，用{{language}}：\n{{input}}"
+            "title": {
+                "zh": "解释概念",
+                "en": "Explain a Concept"
+            },
+            "subtitle": {
+                "zh": "通俗解释 + 例子",
+                "en": "Plain explanation with an example"
+            },
+            "prompt": "用通俗易懂的话解释下面的概念：先用一句话给出定义，再举一个生活中的例子，最后指出一个常见的误解。用{{language}}回答。\n{{input}}"
+        },
+        {
+            "dev": true,
+            "type": "prompt",
+            "group": "ai",
+            "id": "polish-email",
+            "icon": "envelope",
+            "input": "text",
+            "output": "text",
+            "title": {
+                "zh": "邮件润色",
+                "en": "Polish Email"
+            },
+            "subtitle": {
+                "zh": "改成礼貌、简洁的邮件",
+                "en": "Rewrite as a polite, concise email"
+            },
+            "prompt": "把下面的内容改写成一封礼貌、简洁的邮件，保留所有关键信息，不要编造内容。只输出邮件正文。用{{language}}写。\n{{input}}"
+        },
+        {
+            "dev": true,
+            "type": "prompt",
+            "group": "ai",
+            "id": "extract-vocab",
+            "icon": "character.book.closed",
+            "input": "item",
+            "output": "vocab",
+            "title": {
+                "zh": "提取生词",
+                "en": "Extract Vocabulary"
+            },
+            "subtitle": {
+                "zh": "挑出值得学的词加进生词本",
+                "en": "Add useful words to vocabulary"
+            },
+            "prompt": "从下面的内容里挑出最值得学习的单词和短语，不超过 15 个，跳过人名、地名和最常见的基础词。释义用{{language}}，简短。\n{{input}}"
+        },
+        {
+            "dev": true,
+            "type": "prompt",
+            "group": "ai",
+            "id": "photo-question",
+            "icon": "camera.viewfinder",
+            "input": "image",
+            "output": "text",
+            "title": {
+                "zh": "拍题讲解",
+                "en": "Explain a Problem"
+            },
+            "subtitle": {
+                "zh": "拍一道题，讲解题思路",
+                "en": "Snap a problem, get the steps"
+            },
+            "prompt": "下面是一道题目（从照片里识别出的文字，可能有个别识别错误，请按上下文理解）。先说明这道题考什么，再一步一步写出解题过程，最后单独一行写出答案。用{{language}}回答。\n{{input}}"
+        },
+        {
+            "dev": true,
+            "id": "english-podcasts",
+            "type": "feeds",
+            "group": "learn",
+            "icon": "headphones",
+            "title": {
+                "zh": "英语学习播客",
+                "en": "English Learning Podcasts"
+            },
+            "description": {
+                "zh": "适合练听力的英语播客：BBC 6 Minute English、BBC Learning English Conversations、All Ears English、Luke's English Podcast。",
+                "en": "English podcasts for listening practice: BBC 6 Minute English, BBC Learning English Conversations, All Ears English, Luke's English Podcast."
+            },
+            "language": "en-US",
+            "feeds": [
+                {
+                    "url": "https://podcasts.files.bbci.co.uk/p02pc9tn.rss"
+                },
+                {
+                    "url": "https://podcasts.files.bbci.co.uk/p02pc9zn.rss"
+                },
+                {
+                    "url": "https://feeds.megaphone.fm/allearsenglish"
+                },
+                {
+                    "url": "https://teacherluke.libsyn.com/rss"
+                }
+            ]
         },
         {
             "dev": true,
