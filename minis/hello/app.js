@@ -98,7 +98,18 @@
         "share.text": { text: "来自示例小功能" },
         "app.setTitle": { title: "改过的标题" },
         "app.openURL": { url: "https://www.apple.com" },
-        "speech.speak": { text: "你好" },
+        "ui.alert": { title: "删除这条记录？", message: "删除后不能恢复", buttons: [{ text: "取消", style: "cancel" }, { text: "删除", style: "destructive" }] },
+        "ui.prompt": { title: "给计数起个名字", placeholder: "名字", value: "我的计数" },
+        "ui.sheet": {
+            title: "排序方式",
+            options: [
+                { title: "按时间", icon: "clock", checked: true },
+                { title: "按名称", icon: "textformat" },
+                { title: "清空全部", icon: "trash", destructive: true },
+            ],
+        },
+        "ui.info": { title: "关于示例", message: "演示知点小功能能用的能力。", rows: [{ label: "版本", value: "1.2.0" }] },
+        "unknown.method": {},
         "app.close": {},
     }
     document.querySelectorAll("[data-call]").forEach(function (button) {

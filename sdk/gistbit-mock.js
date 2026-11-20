@@ -6,6 +6,7 @@
  *   - toast 在页面底部显示，触感只打印日志
  *   - item.pick 返回一份示例资料，ai 返回固定的模拟文字（ai.stream 分几段发 gistbit:ai 事件），朗读用浏览器的 speechSynthesis
  *   - note.create、vocab.add 只打印日志
+ *   - ui.alert / ui.prompt / ui.sheet / ui.info 用浏览器的 confirm、prompt、alert 模拟
  * 文档：docs/mini-tools-dev.md
  */
 ;(function () {
@@ -136,6 +137,39 @@
         },
         "share.image": function () {
             console.log("[gistbit-mock] share.image")
+        },
+        "ui.alert": function (p) {
+            var buttons = p.buttons && p.buttons.length ? p.buttons : [{ text: "好" }]
+            if (buttons.length === 1) {
+                window.alert(p.title + (p.message ? "\n" + p.message : ""))
+                return { index: 0 }
+            }
+            // 浏览器只有「确定 / 取消」：确定 = 最后一个按钮，取消 = 第一个
+            return { index: window.confirm(p.title + (p.message ? "\n" + p.message : "") + "\n\n确定 = " + buttons[buttons.length - 1].text) ? buttons.length - 1 : 0 }
+        },
+        "ui.prompt": function (p) {
+            var text = window.prompt(p.title + (p.message ? "\n" + p.message : ""), p.value || "")
+            if (text === null) throw { code: "cancelled", message: "用户取消了输入" }
+            return { text: text }
+        },
+        "ui.sheet": function (p) {
+            var list = p.options
+                .map(function (option, index) {
+                    return index + 1 + ". " + option.title
+                })
+                .join("\n")
+            var answer = window.prompt(p.title + "\n" + list + "\n\n输入序号", "1")
+            var index = Number(answer) - 1
+            if (answer === null || !(index >= 0 && index < p.options.length)) throw { code: "cancelled", message: "用户关掉了面板" }
+            return { index: index }
+        },
+        "ui.info": function (p) {
+            var rows = (p.rows || [])
+                .map(function (row) {
+                    return row.label + "：" + row.value
+                })
+                .join("\n")
+            window.alert(p.title + (p.message ? "\n" + p.message : "") + (rows ? "\n\n" + rows : ""))
         },
         "item.pick": function () {
             return MOCK_ITEM
