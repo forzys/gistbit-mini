@@ -27,6 +27,8 @@ docs/                 生成的发布内容（GitHub Pages 从这里提供），
 3. 在 `catalog.source.json` 的 `tools` 里加一条：`{ "id": "<id>", "type": "mini", "group": "…", "source": "minis/<id>" }`。还在开发的加 `"dev": true`，只出现在本地测试目录里。
 4. 发新版本：改 `manifest.json` 的 `version`，重新发布。App 后台下载，下次打开生效。
 
+每个包（小功能 zip、资源包文件）**不能超过 5 MB**，小功能解压后不能超过 20 MB；超过的 `npm run build` 直接报错，App 也不会显示、安装。
+
 能用的 bridge、主题变量、限制见知点项目的 `docs/mini-tools-dev.md`。
 
 ## 资源包

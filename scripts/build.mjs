@@ -18,9 +18,11 @@ import { basename, dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-const MAX_MINI = 20 * 1024 * 1024
-const WARN_MINI = 5 * 1024 * 1024
-const MAX_PACK = 20 * 1024 * 1024
+/** 每个包（小功能 zip、资源包文件）最大 5 MB，和 App 里的上限一致；超过的不发布 */
+const MAX_MINI = 5 * 1024 * 1024
+const MAX_PACK = 5 * 1024 * 1024
+/** 小功能解压后最大 20 MB（App 安装时也会检查） */
+const MAX_UNZIPPED = 20 * 1024 * 1024
 /** App 支持的界面语言 */
 const LANGUAGES = ["zh", "en", "ko", "ja", "es", "de", "fr"]
 const TEXT_FIELDS = ["title", "subtitle", "description", "banner"]
@@ -61,8 +63,9 @@ function buildMini(entry) {
     // -X 不写额外的文件属性；跳过隐藏文件和 .DS_Store
     execFileSync("zip", ["-r", "-X", "-q", zipPath, ".", "-x", "*.DS_Store", "-x", ".*", "-x", "*/.*"], { cwd: directory })
     const size = statSync(zipPath).size
-    if (size > MAX_MINI) return fail(`${entry.id}：包有 ${(size / 1048576).toFixed(1)} MB，超过 20 MB`)
-    if (size > WARN_MINI) console.warn(`! ${entry.id}：包有 ${(size / 1048576).toFixed(1)} MB，建议不超过 5 MB`)
+    if (size > MAX_MINI) return fail(`${entry.id}：包有 ${(size / 1048576).toFixed(1)} MB，超过 5 MB`)
+    const unzipped = Number(execFileSync("unzip", ["-Zt", zipPath]).toString().match(/(\d+) bytes uncompressed/)?.[1] ?? 0)
+    if (unzipped > MAX_UNZIPPED) return fail(`${entry.id}：解压后有 ${(unzipped / 1048576).toFixed(1)} MB，超过 20 MB`)
 
     const { source: _source, dev: _dev, ...rest } = entry
     return {
@@ -82,7 +85,7 @@ function buildPack(entry) {
     const path = join(ROOT, entry.source)
     if (!existsSync(path)) return fail(`${entry.id}：找不到 ${entry.source}`)
     const size = statSync(path).size
-    if (size > MAX_PACK) return fail(`${entry.id}：文件超过 20 MB`)
+    if (size > MAX_PACK) return fail(`${entry.id}：文件有 ${(size / 1048576).toFixed(1)} MB，超过 5 MB`)
     let data
     try {
         data = JSON.parse(readFileSync(path, "utf8"))
