@@ -42,6 +42,8 @@
     var fail = function (name) {
         return function (error) {
             print(name + " 失败：" + error.code + " " + error.message)
+            // 拒绝权限时 message 是给用户看的提示，直接弹出来
+            if (error.code === "permission_denied") gistbit.call("ui.alert", { title: error.message }).catch(function () {})
         }
     }
     window.addEventListener("gistbit:ai", function (event) {
@@ -78,6 +80,7 @@
         gistbit
             .call("note.create", { title: "示例小功能的笔记", markdown: aiOutput.textContent || "（空）" })
             .then(function (result) {
+                // App 会自己弹「已存为笔记」，这里只记日志
                 print("note.create 成功：" + result.id)
             })
             .catch(fail("note.create"))
@@ -86,6 +89,7 @@
         gistbit
             .call("vocab.add", { term: "photosynthesis", meaning: "光合作用", language: "en-US" })
             .then(function (result) {
+                // App 会自己弹提示，这里只记日志
                 print("vocab.add：" + (result.added ? "已加入" : "已经有了"))
             })
             .catch(fail("vocab.add"))
