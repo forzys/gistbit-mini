@@ -1,0 +1,358 @@
+/* 颜色、圆角、字体都用知点注入的变量（--gistbit-*），跟着主题和深浅色变。
+   元素分类用格子顶部一条细色条区分，不铺满色块 */
+:root {
+    color-scheme: light dark;
+    --cell-w: 48px;
+    --cell-h: 56px;
+    --gap: 3px;
+    --c-alkali: #e0723c;
+    --c-alkaline: #d9a23a;
+    --c-transition: #6f8fbf;
+    --c-post: #6aa58a;
+    --c-metalloid: #4fa3a0;
+    --c-nonmetal: #5aa04f;
+    --c-halogen: #b07ac7;
+    --c-noble: #8a6cc9;
+    --c-lanthanide: #c96b8f;
+    --c-actinide: #c4566a;
+    --c-unknown: #9a9aa0;
+}
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+body {
+    margin: 0;
+    background: var(--gistbit-background);
+    color: var(--gistbit-text);
+    font-family: var(--gistbit-font), -apple-system, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+}
+button {
+    font: inherit;
+    color: inherit;
+    border: 0;
+    background: none;
+    padding: 0;
+}
+
+/* ---------- 顶部：搜索 + 分段 ---------- */
+.top {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 16px 12px;
+    background: var(--gistbit-background);
+}
+#search {
+    width: 100%;
+    height: 36px;
+    border: 0;
+    border-radius: var(--gistbit-radius-md);
+    padding: 0 12px;
+    background: var(--gistbit-fill);
+    color: var(--gistbit-text);
+    font: inherit;
+    font-size: 16px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    -webkit-user-select: text;
+    user-select: text;
+}
+#search::placeholder {
+    color: var(--gistbit-text-tertiary);
+}
+.segmented {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2px;
+    border-radius: var(--gistbit-radius-sm);
+    background: var(--gistbit-fill);
+}
+.segmented button {
+    height: 30px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gistbit-text);
+}
+.segmented button.active {
+    background: var(--gistbit-surface);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.top.searching .segmented {
+    display: none;
+}
+
+/* ---------- 周期表 ---------- */
+.scroller {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 16px 8px;
+    scrollbar-width: none;
+}
+.scroller::-webkit-scrollbar {
+    display: none;
+}
+.table {
+    display: grid;
+    grid-template-columns: repeat(18, var(--cell-w));
+    grid-template-rows: repeat(7, var(--cell-h)) 12px repeat(2, var(--cell-h));
+    gap: var(--gap);
+    width: max-content;
+}
+.cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: var(--gistbit-surface);
+    overflow: hidden;
+    transition: opacity 0.15s;
+}
+.cell::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--cat);
+}
+.cell .z {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 9px;
+    color: var(--gistbit-text-tertiary);
+    font-variant-numeric: tabular-nums;
+}
+.cell .symbol {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+.cell .label {
+    font-size: 10px;
+    color: var(--gistbit-text-secondary);
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 2px;
+}
+.cell.placeholder {
+    background: none;
+    border: 1px dashed var(--gistbit-separator);
+    color: var(--gistbit-text-tertiary);
+    font-size: 10px;
+}
+.cell.placeholder::before {
+    display: none;
+}
+.cell.favorite .z::after {
+    content: " ★";
+    color: var(--gistbit-seal);
+}
+.cell:active {
+    opacity: 0.6;
+}
+/* 选中某个分类时，其他的变淡 */
+.table.filtering .cell:not(.match) {
+    opacity: 0.18;
+}
+
+/* ---------- 分类图例 ---------- */
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 16px 24px;
+}
+.legend button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 15px;
+    background: var(--gistbit-surface);
+    font-size: 13px;
+}
+.legend button i {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--cat);
+}
+.legend button.active {
+    background: var(--gistbit-accent);
+    color: var(--gistbit-on-accent);
+}
+
+/* ---------- 列表（搜索结果、收藏） ---------- */
+#list-view {
+    padding: 4px 16px 24px;
+}
+.list {
+    border-radius: var(--gistbit-radius-lg);
+    background: var(--gistbit-surface);
+    overflow: hidden;
+}
+.list:empty {
+    display: none;
+}
+.row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 56px;
+    padding: 8px 16px;
+    text-align: left;
+    border-top: 0.5px solid var(--gistbit-separator);
+}
+.row:first-child {
+    border-top: 0;
+}
+.row:active {
+    background: var(--gistbit-fill);
+}
+.row .symbol {
+    width: 40px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 3px solid var(--cat);
+    padding-bottom: 2px;
+}
+.row .text {
+    flex: 1;
+    min-width: 0;
+}
+.row .title {
+    font-size: 16px;
+}
+.row .meta {
+    font-size: 12px;
+    color: var(--gistbit-text-secondary);
+    margin-top: 2px;
+}
+.row .z {
+    font-size: 13px;
+    color: var(--gistbit-text-tertiary);
+    font-variant-numeric: tabular-nums;
+}
+.empty {
+    margin: 64px 0;
+    white-space: pre-line;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--gistbit-text-secondary);
+    font-size: 15px;
+}
+
+/* ---------- 详情面板 ---------- */
+.sheet-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    animation: fade 0.2s ease-out;
+}
+.sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 11;
+    padding: 20px 20px calc(16px + env(safe-area-inset-bottom));
+    border-radius: var(--gistbit-radius-xl) var(--gistbit-radius-xl) 0 0;
+    background: var(--gistbit-surface);
+    animation: rise 0.25s ease-out;
+}
+[hidden] {
+    display: none !important;
+}
+.sheet-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+.big-symbol {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 700;
+    border-radius: var(--gistbit-radius-md);
+    background: var(--gistbit-background);
+    border-top: 4px solid var(--cat);
+}
+.name {
+    font-size: 22px;
+    font-weight: 700;
+}
+.sub {
+    margin-top: 2px;
+    font-size: 14px;
+    color: var(--gistbit-text-secondary);
+}
+.rows {
+    margin: 0 0 16px;
+}
+.rows div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--gistbit-separator);
+    font-size: 15px;
+}
+.rows dt {
+    color: var(--gistbit-text-secondary);
+}
+.rows dd {
+    margin: 0;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.actions button {
+    height: 46px;
+    border-radius: var(--gistbit-radius-md);
+    background: var(--gistbit-accent);
+    color: var(--gistbit-on-accent);
+    font-size: 16px;
+    font-weight: 600;
+}
+.actions button.secondary {
+    background: var(--gistbit-fill);
+    color: var(--gistbit-text);
+}
+@keyframes rise {
+    from {
+        transform: translateY(100%);
+    }
+}
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+}

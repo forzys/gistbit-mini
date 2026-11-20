@@ -1,0 +1,11 @@
+{
+    "id": "periodic-table",
+    "version": "1.0.0",
+    "entry": "index.html",
+    "title": { "zh": "元素周期表", "en": "Periodic Table" },
+    "subtitle": { "zh": "点元素看详情", "en": "Tap an element for details" },
+    "icon": "atom",
+    "permissions": ["storage", "share"],
+    "orientation": "portrait",
+    "network": []
+}

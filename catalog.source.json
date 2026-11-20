@@ -77,6 +77,13 @@
                 "zh": "5 个常被识别错的技术名词，测试术语导入用。",
                 "en": "5 tech terms often misrecognized, for testing term import."
             }
+        },
+        {
+            "dev": true,
+            "id": "periodic-table",
+            "type": "mini",
+            "group": "learn",
+            "source": "minis/periodic-table"
         }
     ]
 }

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <title>元素周期表</title>
+        <link rel="stylesheet" href="style.css" />
+        <script>
+            // 不在知点 App 里（浏览器开发时）才加载模拟的 window.gistbit
+            if (!(window.gistbit && window.gistbit.call)) document.write('<script src="../../sdk/gistbit-mock.js"><\/script>')
+        </script>
+    </head>
+    <body>
+        <div class="top">
+            <input id="search" type="search" autocomplete="off" autocorrect="off" spellcheck="false" />
+            <div class="segmented" id="tabs">
+                <button data-tab="table" class="active"></button>
+                <button data-tab="favorites"></button>
+            </div>
+        </div>
+
+        <main id="table-view">
+            <div class="scroller"><div class="table" id="table"></div></div>
+            <div class="legend" id="legend"></div>
+        </main>
+        <main id="list-view" hidden>
+            <div class="list" id="list"></div>
+            <p class="empty" id="empty" hidden></p>
+        </main>
+
+        <div class="sheet-backdrop" id="backdrop" hidden></div>
+        <section class="sheet" id="sheet" hidden aria-modal="true" role="dialog">
+            <div class="sheet-head">
+                <div class="big-symbol" id="d-symbol"></div>
+                <div class="names">
+                    <div class="name" id="d-name"></div>
+                    <div class="sub" id="d-sub"></div>
+                </div>
+            </div>
+            <dl class="rows" id="d-rows"></dl>
+            <div class="actions">
+                <button id="d-favorite" class="secondary"></button>
+                <button id="d-share"></button>
+            </div>
+        </section>
+
+        <script src="data.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
