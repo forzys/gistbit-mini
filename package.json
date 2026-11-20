@@ -1,0 +1,10 @@
+{
+    "name": "gistbit-mini",
+    "private": true,
+    "description": "知点（Gistbit）的工具目录、小功能、资源包",
+    "type": "module",
+    "scripts": {
+        "build": "node scripts/build.mjs",
+        "serve": "node scripts/serve.mjs"
+    }
+}

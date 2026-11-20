@@ -1,0 +1,10 @@
+{
+    "kind": "terms",
+    "terms": [
+        { "term": "Kubernetes", "aliases": ["酷伯内提斯", "库伯尼特斯"] },
+        { "term": "PyTorch", "aliases": ["派托奇"] },
+        { "term": "Transformer", "aliases": ["传送门模型"] },
+        { "term": "ChatGPT", "aliases": ["拆特GPT"] },
+        { "term": "知点", "aliases": ["只点", "知典"] }
+    ]
+}

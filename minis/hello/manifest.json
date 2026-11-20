@@ -1,0 +1,11 @@
+{
+    "id": "hello",
+    "version": "1.0.0",
+    "entry": "index.html",
+    "title": { "zh": "示例小功能", "en": "Hello" },
+    "subtitle": { "zh": "主题变量和 bridge 演示", "en": "Theme and bridge demo" },
+    "icon": "hand.wave",
+    "permissions": ["storage", "share"],
+    "orientation": "portrait",
+    "network": []
+}

@@ -1,0 +1,91 @@
+{
+    "version": 1795205374,
+    "updatedAt": "2026-11-20T20:09:34.896Z",
+    "groups": [
+        {
+            "id": "translate",
+            "title": {
+                "zh": "翻译",
+                "en": "Translate",
+                "ko": "번역",
+                "ja": "翻訳",
+                "es": "Traducir",
+                "de": "Übersetzen",
+                "fr": "Traduire"
+            }
+        },
+        {
+            "id": "recognize",
+            "title": {
+                "zh": "识别",
+                "en": "Recognize",
+                "ko": "인식",
+                "ja": "認識",
+                "es": "Reconocer",
+                "de": "Erkennen",
+                "fr": "Reconnaître"
+            }
+        },
+        {
+            "id": "ai",
+            "title": {
+                "zh": "AI",
+                "en": "AI",
+                "ko": "AI",
+                "ja": "AI",
+                "es": "IA",
+                "de": "KI",
+                "fr": "IA"
+            }
+        },
+        {
+            "id": "learn",
+            "title": {
+                "zh": "学习",
+                "en": "Learn",
+                "ko": "학습",
+                "ja": "学習",
+                "es": "Aprender",
+                "de": "Lernen",
+                "fr": "Apprendre"
+            }
+        }
+    ],
+    "tools": [
+        {
+            "id": "translate",
+            "type": "local",
+            "group": "translate",
+            "icon": "translate",
+            "route": "/tools/translate"
+        },
+        {
+            "id": "documents",
+            "type": "local",
+            "group": "translate",
+            "icon": "doc.text",
+            "route": "/tools/documents"
+        },
+        {
+            "id": "scan",
+            "type": "local",
+            "group": "recognize",
+            "icon": "doc.viewfinder",
+            "route": "/tools/scan"
+        },
+        {
+            "id": "ocr",
+            "type": "local",
+            "group": "recognize",
+            "icon": "text.viewfinder",
+            "route": "/tools/ocr"
+        },
+        {
+            "id": "extract",
+            "type": "local",
+            "group": "recognize",
+            "icon": "waveform.badge.plus",
+            "route": "/tools/extract"
+        }
+    ]
+}

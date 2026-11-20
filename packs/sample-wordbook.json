@@ -1,0 +1,19 @@
+{
+    "kind": "wordbook",
+    "language": "en-US",
+    "meaningLanguage": "zh-Hans",
+    "words": [
+        ["photosynthesis", "/ˌfəʊtəʊˈsɪnθəsɪs/", "n. 光合作用"],
+        ["chlorophyll", "/ˈklɒrəfɪl/", "n. 叶绿素"],
+        ["mitochondria", "/ˌmaɪtəʊˈkɒndriə/", "n. 线粒体（复数）"],
+        ["enzyme", "/ˈenzaɪm/", "n. 酶"],
+        ["osmosis", "/ɒzˈməʊsɪs/", "n. 渗透作用"],
+        ["metabolism", "/məˈtæbəlɪzəm/", "n. 新陈代谢"],
+        ["chromosome", "/ˈkrəʊməsəʊm/", "n. 染色体"],
+        ["ecosystem", "/ˈiːkəʊsɪstəm/", "n. 生态系统"],
+        ["organism", "/ˈɔːɡənɪzəm/", "n. 生物体"],
+        ["membrane", "/ˈmembreɪn/", "n. 膜"],
+        ["nucleus", "/ˈnjuːkliəs/", "n. 细胞核"],
+        ["protein", "/ˈprəʊtiːn/", "n. 蛋白质"]
+    ]
+}

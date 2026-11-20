@@ -1,0 +1,4 @@
+.DS_Store
+node_modules/
+# npm run serve 生成的本地测试目录
+.local/

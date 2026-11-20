@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>示例小功能</title>
+        <link rel="stylesheet" href="style.css" />
+        <script>
+            // 不在知点 App 里（浏览器开发时）才加载模拟的 window.gistbit；App 里会在页面加载前注入真的
+            if (!(window.gistbit && window.gistbit.call)) document.write('<script src="../../sdk/gistbit-mock.js"><\/script>')
+        </script>
+    </head>
+    <body>
+        <section class="card">
+            <h2>环境</h2>
+            <pre id="env"></pre>
+        </section>
+
+        <section class="card">
+            <h2>计数（gistbit.storage）</h2>
+            <p class="count" id="count">0</p>
+            <div class="row">
+                <button id="increase">加一</button>
+                <button class="secondary" id="reset">清零</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Bridge</h2>
+            <div class="grid">
+                <button data-call="ui.toast">toast</button>
+                <button data-call="ui.haptic">触感</button>
+                <button data-call="clipboard.write">复制</button>
+                <button data-call="share.text">分享文字</button>
+                <button data-call="app.setTitle">改标题</button>
+                <button data-call="app.openURL">打开网址</button>
+                <button data-call="speech.speak">不支持的方法</button>
+                <button data-call="app.close" class="danger">关闭</button>
+            </div>
+            <pre id="log"></pre>
+        </section>
+
+        <script src="app.js"></script>
+    </body>
+</html>
