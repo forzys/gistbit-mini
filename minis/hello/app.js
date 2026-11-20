@@ -36,6 +36,61 @@
         setCount(0)
     }
 
+    // 资料与 AI：选资料（第一次会弹授权框）→ 读文字 → AI 流式总结 → 朗读、存笔记；加生词
+    var picked = null
+    var aiOutput = document.getElementById("ai")
+    var fail = function (name) {
+        return function (error) {
+            print(name + " 失败：" + error.code + " " + error.message)
+        }
+    }
+    window.addEventListener("gistbit:ai", function (event) {
+        aiOutput.textContent = event.detail.text
+    })
+    document.getElementById("pick").onclick = function () {
+        gistbit
+            .call("item.pick", {})
+            .then(function (item) {
+                picked = item
+                aiOutput.textContent = "已选择：" + item.title + "（" + item.kind + "）"
+            })
+            .catch(fail("item.pick"))
+    }
+    document.getElementById("summarize").onclick = function () {
+        if (!picked) return print("先选一份资料")
+        gistbit
+            .call("item.text", { id: picked.id })
+            .then(function (result) {
+                return gistbit.call("ai.stream", { prompt: "用三句话总结下面的内容：\n" + result.text.slice(0, 3000), maxTokens: 400 })
+            })
+            .then(function (result) {
+                aiOutput.textContent = result.text
+            })
+            .catch(fail("ai.stream"))
+    }
+    document.getElementById("speak").onclick = function () {
+        gistbit.call("speech.speak", { text: aiOutput.textContent || "你好，知点" }).catch(fail("speech.speak"))
+    }
+    document.getElementById("stop").onclick = function () {
+        gistbit.call("speech.stop").catch(fail("speech.stop"))
+    }
+    document.getElementById("save-note").onclick = function () {
+        gistbit
+            .call("note.create", { title: "示例小功能的笔记", markdown: aiOutput.textContent || "（空）" })
+            .then(function (result) {
+                print("note.create 成功：" + result.id)
+            })
+            .catch(fail("note.create"))
+    }
+    document.getElementById("add-word").onclick = function () {
+        gistbit
+            .call("vocab.add", { term: "photosynthesis", meaning: "光合作用", language: "en-US" })
+            .then(function (result) {
+                print("vocab.add：" + (result.added ? "已加入" : "已经有了"))
+            })
+            .catch(fail("vocab.add"))
+    }
+
     var params = {
         "ui.toast": { text: "来自小功能的提示", type: "success" },
         "ui.haptic": { style: "medium" },
