@@ -8,6 +8,7 @@
 //   - pack   写 "source": "packs/<文件>.json"，不写 file；自动填 file、count、language（词书）、packKind
 //   - 其他类型原样输出；"dev": true 的条目只在本地测试时输出
 //   - 目录的 version 自动取当前时间（秒），App 拉到新的就替换
+//   - 检查多语言：要正式发布的条目（不是 dev）和分组，名称、副标题、说明、横幅缺了哪种语言就提示（不拦着发布，缺的语言 App 显示英文）
 // 文件格式和字段说明：知点项目 docs/tool-extensions.md、docs/mini-tools-dev.md
 
 import { execFileSync } from "node:child_process"
@@ -20,6 +21,9 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const MAX_MINI = 20 * 1024 * 1024
 const WARN_MINI = 5 * 1024 * 1024
 const MAX_PACK = 20 * 1024 * 1024
+/** App 支持的界面语言 */
+const LANGUAGES = ["zh", "en", "ko", "ja", "es", "de", "fr"]
+const TEXT_FIELDS = ["title", "subtitle", "description", "banner"]
 
 const errors = []
 const fail = (message) => errors.push(message)
@@ -113,6 +117,20 @@ function buildPack(entry) {
 
 // ---------- 目录 ----------
 
+/** 缺哪些语言：[字段, 缺的语言] */
+function missingLanguages(entry) {
+    return TEXT_FIELDS.flatMap((field) => {
+        const value = entry[field]
+        if (!value || typeof value !== "object") return []
+        const missing = LANGUAGES.filter((lang) => !value[lang])
+        return missing.length ? [[field, missing]] : []
+    })
+}
+const languageWarnings = []
+for (const group of source.groups ?? []) {
+    for (const [field, missing] of missingLanguages(group)) languageWarnings.push(`分组 ${group.id} 的 ${field} 缺：${missing.join(" ")}`)
+}
+
 const ids = new Set()
 const tools = []
 for (const entry of source.tools ?? []) {
@@ -127,7 +145,11 @@ for (const entry of source.tools ?? []) {
     }
     ids.add(entry.id)
     const built = entry.type === "mini" && entry.source ? buildMini(entry) : entry.type === "pack" && entry.source ? buildPack(entry) : (({ dev: _dev, ...rest }) => rest)(entry)
-    if (built) tools.push(built)
+    if (built) {
+        tools.push(built)
+        // 小功能的名称来自 manifest，检查生成后的条目
+        if (!entry.dev) for (const [field, missing] of missingLanguages(built)) languageWarnings.push(`${entry.id} 的 ${field} 缺：${missing.join(" ")}`)
+    }
 }
 
 if (errors.length) {
@@ -145,6 +167,10 @@ writeFileSync(join(outDirectory, "catalog.json"), `${JSON.stringify(catalog, nul
 // GitHub Pages 不要用 Jekyll 处理（会跳过下划线开头的文件）
 if (!local) writeFileSync(join(outDirectory, ".nojekyll"), "")
 
+if (languageWarnings.length) {
+    console.warn(`! 多语言不全（缺的语言 App 显示英文）：`)
+    languageWarnings.forEach((message) => console.warn(`  - ${message}`))
+}
 console.log(`✓ ${local ? "本地测试" : "正式"}目录：${join(outDirectory, "catalog.json")}`)
 console.log(`  ${tools.length} 个工具，地址前缀 ${baseUrl}`)
 for (const tool of tools) {

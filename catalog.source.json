@@ -37,11 +37,21 @@
             "output": "note",
             "title": {
                 "zh": "整理要点",
-                "en": "Key Points"
+                "en": "Key Points",
+                "ko": "핵심 정리",
+                "ja": "要点まとめ",
+                "es": "Puntos clave",
+                "de": "Kernpunkte",
+                "fr": "Points clés"
             },
             "subtitle": {
                 "zh": "资料整理成要点笔记",
-                "en": "Turn an item into a note of key points"
+                "en": "Turn an item into a note of key points",
+                "ko": "자료를 핵심 노트로 정리",
+                "ja": "資料を要点ノートにまとめる",
+                "es": "Convierte un material en una nota de puntos clave",
+                "de": "Material als Notiz mit Kernpunkten",
+                "fr": "Transforme un document en note de points clés"
             },
             "prompt": "把下面的资料整理成 5 到 8 条要点。每条一句话，按原文的顺序排列，不要加原文没有的内容。用{{language}}写。\n{{input}}"
         },
@@ -55,11 +65,21 @@
             "output": "text",
             "title": {
                 "zh": "出几道题",
-                "en": "Make a Quiz"
+                "en": "Make a Quiz",
+                "ko": "퀴즈 만들기",
+                "ja": "問題を作る",
+                "es": "Crear un test",
+                "de": "Quiz erstellen",
+                "fr": "Créer un quiz"
             },
             "subtitle": {
                 "zh": "根据资料出选择题",
-                "en": "Multiple-choice questions from an item"
+                "en": "Multiple-choice questions from an item",
+                "ko": "자료로 객관식 문제 만들기",
+                "ja": "資料から選択問題を作る",
+                "es": "Preguntas tipo test a partir de un material",
+                "de": "Multiple-Choice-Fragen aus einem Material",
+                "fr": "QCM à partir d'un document"
             },
             "prompt": "根据下面的资料出 5 道单选题。每题 4 个选项（A–D），只有一个正确；每题后面写出正确答案和一句话解析。题目只考资料里有的内容。用{{language}}写。\n{{input}}"
         },
@@ -73,11 +93,21 @@
             "output": "text",
             "title": {
                 "zh": "解释概念",
-                "en": "Explain a Concept"
+                "en": "Explain a Concept",
+                "ko": "개념 설명",
+                "ja": "概念を説明",
+                "es": "Explicar un concepto",
+                "de": "Begriff erklären",
+                "fr": "Expliquer un concept"
             },
             "subtitle": {
                 "zh": "通俗解释 + 例子",
-                "en": "Plain explanation with an example"
+                "en": "Plain explanation with an example",
+                "ko": "쉬운 설명과 예시",
+                "ja": "わかりやすい説明と例",
+                "es": "Explicación sencilla con un ejemplo",
+                "de": "Einfache Erklärung mit Beispiel",
+                "fr": "Explication simple avec un exemple"
             },
             "prompt": "用通俗易懂的话解释下面的概念：先用一句话给出定义，再举一个生活中的例子，最后指出一个常见的误解。用{{language}}回答。\n{{input}}"
         },
@@ -91,11 +121,21 @@
             "output": "text",
             "title": {
                 "zh": "邮件润色",
-                "en": "Polish Email"
+                "en": "Polish Email",
+                "ko": "이메일 다듬기",
+                "ja": "メールを整える",
+                "es": "Pulir correo",
+                "de": "E-Mail verfeinern",
+                "fr": "Peaufiner un e-mail"
             },
             "subtitle": {
                 "zh": "改成礼貌、简洁的邮件",
-                "en": "Rewrite as a polite, concise email"
+                "en": "Rewrite as a polite, concise email",
+                "ko": "정중하고 간결한 이메일로",
+                "ja": "丁寧で簡潔なメールに書き直す",
+                "es": "Reescribir como un correo cortés y conciso",
+                "de": "Als höfliche, knappe E-Mail umschreiben",
+                "fr": "Réécrire en e-mail poli et concis"
             },
             "prompt": "把下面的内容改写成一封礼貌、简洁的邮件，保留所有关键信息，不要编造内容。只输出邮件正文。用{{language}}写。\n{{input}}"
         },
@@ -109,11 +149,21 @@
             "output": "vocab",
             "title": {
                 "zh": "提取生词",
-                "en": "Extract Vocabulary"
+                "en": "Extract Vocabulary",
+                "ko": "단어 추출",
+                "ja": "単語を抽出",
+                "es": "Extraer vocabulario",
+                "de": "Vokabeln extrahieren",
+                "fr": "Extraire le vocabulaire"
             },
             "subtitle": {
                 "zh": "挑出值得学的词加进生词本",
-                "en": "Add useful words to vocabulary"
+                "en": "Add useful words to vocabulary",
+                "ko": "배울 만한 단어를 단어장에 추가",
+                "ja": "覚えたい単語を単語帳に追加",
+                "es": "Añade palabras útiles al vocabulario",
+                "de": "Nützliche Wörter ins Vokabular",
+                "fr": "Ajoute les mots utiles au vocabulaire"
             },
             "prompt": "从下面的内容里挑出最值得学习的单词和短语，不超过 15 个，跳过人名、地名和最常见的基础词。释义用{{language}}，简短。\n{{input}}"
         },
@@ -127,11 +177,21 @@
             "output": "text",
             "title": {
                 "zh": "拍题讲解",
-                "en": "Explain a Problem"
+                "en": "Explain a Problem",
+                "ko": "문제 풀이",
+                "ja": "問題を解説",
+                "es": "Explicar un ejercicio",
+                "de": "Aufgabe erklären",
+                "fr": "Expliquer un exercice"
             },
             "subtitle": {
                 "zh": "拍一道题，讲解题思路",
-                "en": "Snap a problem, get the steps"
+                "en": "Snap a problem, get the steps",
+                "ko": "문제를 찍으면 풀이 과정을 설명",
+                "ja": "問題を撮ると解き方を説明",
+                "es": "Haz una foto y obtén los pasos",
+                "de": "Foto machen, Lösungsweg erhalten",
+                "fr": "Prenez une photo, obtenez les étapes"
             },
             "prompt": "下面是一道题目（从照片里识别出的文字，可能有个别识别错误，请按上下文理解）。先说明这道题考什么，再一步一步写出解题过程，最后单独一行写出答案。用{{language}}回答。\n{{input}}"
         },
@@ -143,11 +203,21 @@
             "icon": "headphones",
             "title": {
                 "zh": "英语学习播客",
-                "en": "English Learning Podcasts"
+                "en": "English Learning Podcasts",
+                "ko": "영어 학습 팟캐스트",
+                "ja": "英語学習ポッドキャスト",
+                "es": "Pódcasts para aprender inglés",
+                "de": "Podcasts zum Englischlernen",
+                "fr": "Podcasts pour apprendre l'anglais"
             },
             "description": {
                 "zh": "适合练听力的英语播客：BBC 6 Minute English、BBC Learning English Conversations、All Ears English、Luke's English Podcast。",
-                "en": "English podcasts for listening practice: BBC 6 Minute English, BBC Learning English Conversations, All Ears English, Luke's English Podcast."
+                "en": "English podcasts for listening practice: BBC 6 Minute English, BBC Learning English Conversations, All Ears English, Luke's English Podcast.",
+                "ko": "듣기 연습에 좋은 영어 팟캐스트: BBC 6 Minute English, BBC Learning English Conversations, All Ears English, Luke's English Podcast.",
+                "ja": "リスニング練習に向いた英語ポッドキャスト：BBC 6 Minute English、BBC Learning English Conversations、All Ears English、Luke's English Podcast。",
+                "es": "Pódcasts en inglés para practicar la comprensión auditiva: BBC 6 Minute English, BBC Learning English Conversations, All Ears English, Luke's English Podcast.",
+                "de": "Englische Podcasts fürs Hörverstehen: BBC 6 Minute English, BBC Learning English Conversations, All Ears English, Luke's English Podcast.",
+                "fr": "Podcasts en anglais pour s'entraîner à l'écoute : BBC 6 Minute English, BBC Learning English Conversations, All Ears English, Luke's English Podcast."
             },
             "language": "en-US",
             "feeds": [

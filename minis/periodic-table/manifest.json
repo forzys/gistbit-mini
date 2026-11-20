@@ -2,10 +2,29 @@
     "id": "periodic-table",
     "version": "1.0.0",
     "entry": "index.html",
-    "title": { "zh": "元素周期表", "en": "Periodic Table" },
-    "subtitle": { "zh": "点元素看详情", "en": "Tap an element for details" },
+    "title": {
+        "zh": "元素周期表",
+        "en": "Periodic Table",
+        "ko": "원소 주기율표",
+        "ja": "元素周期表",
+        "es": "Tabla periódica",
+        "de": "Periodensystem",
+        "fr": "Tableau périodique"
+    },
+    "subtitle": {
+        "zh": "点元素看详情",
+        "en": "Tap an element for details",
+        "ko": "원소를 눌러 자세히 보기",
+        "ja": "元素をタップして詳細を見る",
+        "es": "Toca un elemento para ver detalles",
+        "de": "Element antippen für Details",
+        "fr": "Touchez un élément pour les détails"
+    },
     "icon": "atom",
-    "permissions": ["storage", "share"],
+    "permissions": [
+        "storage",
+        "share"
+    ],
     "orientation": "portrait",
     "network": []
 }
