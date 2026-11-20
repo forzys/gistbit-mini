@@ -1,5 +1,6 @@
 /* 颜色、圆角、字体都用知点注入的变量（--gistbit-*），跟着主题和深浅色变。
-   元素分类用格子顶部一条细色条区分，不铺满色块 */
+   元素分类用格子顶部一条细色条区分，不铺满色块。
+   整页不滚动：顶部固定，下面的周期表（横竖都能滑）、列表各自滚动，滑到头也不带动整页 */
 :root {
     color-scheme: light dark;
     --cell-w: 48px;
@@ -21,7 +22,15 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
+html,
 body {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     background: var(--gistbit-background);
     color: var(--gistbit-text);
@@ -40,9 +49,7 @@ button {
 
 /* ---------- 顶部：搜索 + 分段 ---------- */
 .top {
-    position: sticky;
-    top: 0;
-    z-index: 2;
+    flex: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -92,10 +99,22 @@ button {
 }
 
 /* ---------- 周期表 ---------- */
+main {
+    flex: 1;
+    min-height: 0;
+}
+#table-view {
+    display: flex;
+    flex-direction: column;
+}
+/* 周期表自己横竖滚动 */
 .scroller {
-    overflow-x: auto;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
-    padding: 4px 16px 8px;
+    padding: 4px 16px 12px;
     scrollbar-width: none;
 }
 .scroller::-webkit-scrollbar {
@@ -107,6 +126,8 @@ button {
     grid-template-rows: repeat(7, var(--cell-h)) 12px repeat(2, var(--cell-h));
     gap: var(--gap);
     width: max-content;
+    /* 横向滑到最右边时留出页边距（滚动容器的右内边距 WebKit 不算） */
+    padding-right: 16px;
 }
 .cell {
     position: relative;
@@ -171,14 +192,22 @@ button {
     opacity: 0.18;
 }
 
-/* ---------- 分类图例 ---------- */
+/* ---------- 分类图例：固定在底部，一行横向滑动 ---------- */
 .legend {
+    flex: none;
     display: flex;
-    flex-wrap: wrap;
     gap: 6px;
-    padding: 8px 16px 24px;
+    overflow-x: auto;
+    overscroll-behavior: contain;
+    padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+    scrollbar-width: none;
+}
+.legend::-webkit-scrollbar {
+    display: none;
 }
 .legend button {
+    flex: none;
+    white-space: nowrap;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -201,7 +230,10 @@ button {
 
 /* ---------- 列表（搜索结果、收藏） ---------- */
 #list-view {
-    padding: 4px 16px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 16px calc(24px + env(safe-area-inset-bottom));
 }
 .list {
     border-radius: var(--gistbit-radius-lg);
