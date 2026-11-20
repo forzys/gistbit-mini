@@ -1,6 +1,7 @@
 /* 颜色、圆角、字体都用知点注入的变量（--gistbit-*），跟着主题和深浅色变。
    元素分类用格子顶部一条细色条区分，不铺满色块。
-   整页不滚动：顶部固定，下面的周期表（横竖都能滑）、列表各自滚动，滑到头也不带动整页 */
+   整页不滚动：顶部固定，下面的内容区上下滚动（有惯性和回弹）；周期表在内容区里只左右滑。
+   横、竖分给两个滚动区域，手势按起手方向交给其中一个（和原生的嵌套滚动一样），不会斜着走 */
 :root {
     color-scheme: light dark;
     --cell-w: 48px;
@@ -26,7 +27,6 @@ html,
 body {
     height: 100%;
     overflow: hidden;
-    overscroll-behavior: none;
 }
 body {
     display: flex;
@@ -98,23 +98,20 @@ button {
     display: none;
 }
 
-/* ---------- 周期表 ---------- */
+/* ---------- 内容区：上下滚动 ---------- */
 main {
     flex: 1;
     min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: env(safe-area-inset-bottom);
 }
-#table-view {
-    display: flex;
-    flex-direction: column;
-}
-/* 周期表自己横竖滚动 */
+
+/* ---------- 周期表：只左右滑 ---------- */
 .scroller {
-    flex: 1;
-    min-height: 0;
-    overflow: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    padding: 4px 16px 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 16px 8px;
     scrollbar-width: none;
 }
 .scroller::-webkit-scrollbar {
@@ -185,28 +182,22 @@ main {
     color: var(--gistbit-seal);
 }
 .cell:active {
-    opacity: 0.6;
+    opacity: 0.7;
+    transition: none;
 }
 /* 选中某个分类时，其他的变淡 */
 .table.filtering .cell:not(.match) {
     opacity: 0.18;
 }
 
-/* ---------- 分类图例：固定在底部，一行横向滑动 ---------- */
+/* ---------- 分类图例：周期表下面，自动换行 ---------- */
 .legend {
-    flex: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
-    overflow-x: auto;
-    overscroll-behavior: contain;
-    padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
-    scrollbar-width: none;
-}
-.legend::-webkit-scrollbar {
-    display: none;
+    padding: 8px 16px 24px;
 }
 .legend button {
-    flex: none;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
@@ -230,10 +221,7 @@ main {
 
 /* ---------- 列表（搜索结果、收藏） ---------- */
 #list-view {
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    padding: 4px 16px calc(24px + env(safe-area-inset-bottom));
+    padding: 4px 16px 24px;
 }
 .list {
     border-radius: var(--gistbit-radius-lg);
