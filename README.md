@@ -35,7 +35,7 @@ docs/                 生成的发布内容（GitHub Pages 从这里提供），
 - 术语表：`{ "kind": "terms", "terms": [{ "term": "Kubernetes", "aliases": ["酷伯内提斯"] }, …] }`。
 - 在 `catalog.source.json` 里加：`{ "id": "…", "type": "pack", "group": "…", "source": "packs/<文件>.json", "title": { "zh": "…", "en": "…" } }`。条数、语言、sha256 由发布脚本填。
 
-其他类型（AI 指令 `prompt`、网页书签 `link`、活动 `event`、订阅合集 `feeds`、本地工具 `local`）直接按目录格式写在 `catalog.source.json` 里，见知点项目的 `docs/tool-extensions.md`。
+其他类型（AI 指令 `prompt`、网页书签 `link`、活动 `event`、订阅合集 `feeds`；`local` 只用于 App 里已有、但内置目录没列出的页面）直接按目录格式写在 `catalog.source.json` 里，见知点项目的 `docs/tool-extensions.md`。
 
 ## 本地测试
 
@@ -59,4 +59,4 @@ git add -A && git commit -m "…" && git push
 
 GitHub Pages 一般一两分钟内更新。
 
-注意：**正式目录会整个替换 App 内置的目录**，所以 `catalog.source.json` 里要一直保留 5 个本地工具（翻译、文档翻译、扫描、识字、提取音频），删掉的话 App 里就不显示了。
+远程目录是**增量**：App 内置的本地工具（翻译、文档翻译、扫描、识字、提取音频）和「翻译」「识别」分组永远都在，这里只写要新增的工具和分组；和内置同 id 的会被忽略。新工具可以放进内置分组（`"group": "translate"` / `"recognize"`），排在内置工具后面。开发版 App 内置的测试活动、测试合集也一直在，不用写在这里。
