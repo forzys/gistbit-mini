@@ -29,6 +29,132 @@
     "tools": [
         {
             "dev": true,
+            "id": "scan-translate-note",
+            "type": "flow",
+            "group": "translate",
+            "icon": "doc.text.viewfinder",
+            "title": {
+                "zh": "拍照翻译成笔记",
+                "en": "Photo to Translated Note",
+                "ko": "사진 번역 노트",
+                "ja": "写真を翻訳してノートに",
+                "es": "Foto a nota traducida",
+                "de": "Foto als übersetzte Notiz",
+                "fr": "Photo en note traduite"
+            },
+            "subtitle": {
+                "zh": "拍课本、讲义，译文存成笔记",
+                "en": "Snap a page, save the translation as a note",
+                "ko": "교재를 찍어 번역문을 노트로",
+                "ja": "教科書を撮って訳文をノートに",
+                "es": "Fotografía una página y guarda la traducción",
+                "de": "Seite fotografieren, Übersetzung als Notiz",
+                "fr": "Photographiez une page, gardez la traduction"
+            },
+            "steps": [
+                {
+                    "type": "camera"
+                },
+                {
+                    "type": "ocr"
+                },
+                {
+                    "type": "translate",
+                    "to": "interface"
+                },
+                {
+                    "type": "saveNote"
+                }
+            ]
+        },
+        {
+            "dev": true,
+            "id": "photo-clean-text",
+            "type": "flow",
+            "group": "recognize",
+            "icon": "text.badge.checkmark",
+            "title": {
+                "zh": "识字并整理",
+                "en": "Recognize & Tidy Up",
+                "ko": "인식 후 정리",
+                "ja": "文字認識して整える",
+                "es": "Reconocer y ordenar",
+                "de": "Erkennen und ordnen",
+                "fr": "Reconnaître et mettre en forme"
+            },
+            "subtitle": {
+                "zh": "选图识字，修正识别错误后复制",
+                "en": "Recognize an image, fix errors, copy",
+                "ko": "이미지 인식 후 오류를 고쳐 복사",
+                "ja": "画像の文字を認識し、誤りを直してコピー",
+                "es": "Reconoce una imagen, corrige errores y copia",
+                "de": "Bild erkennen, Fehler korrigieren, kopieren",
+                "fr": "Reconnaît une image, corrige et copie"
+            },
+            "steps": [
+                {
+                    "type": "photos"
+                },
+                {
+                    "type": "ocr"
+                },
+                {
+                    "type": "ai",
+                    "title": {
+                        "zh": "修正识别错误",
+                        "en": "Fix Recognition Errors",
+                        "ko": "인식 오류 수정",
+                        "ja": "認識の誤りを修正",
+                        "es": "Corregir errores",
+                        "de": "Erkennungsfehler korrigieren",
+                        "fr": "Corriger les erreurs"
+                    },
+                    "prompt": "下面是从图片里识别出的文字，可能有错字、断行和多余的空格。修正明显的识别错误，按原来的段落重新排好，不要改写内容、不要增删信息。只输出整理后的文字。\n{{input}}"
+                },
+                {
+                    "type": "copy"
+                }
+            ]
+        },
+        {
+            "dev": true,
+            "id": "translate-speak",
+            "type": "flow",
+            "group": "learn",
+            "icon": "speaker.wave.2",
+            "title": {
+                "zh": "翻译并朗读",
+                "en": "Translate & Read Aloud",
+                "ko": "번역 후 읽어 주기",
+                "ja": "翻訳して読み上げ",
+                "es": "Traducir y leer en voz alta",
+                "de": "Übersetzen und vorlesen",
+                "fr": "Traduire et lire à voix haute"
+            },
+            "subtitle": {
+                "zh": "输入一句话，翻译成学习语言并朗读",
+                "en": "Translate into your learning language and hear it",
+                "ko": "학습 언어로 번역해 들려줌",
+                "ja": "学習言語に訳して読み上げ",
+                "es": "Tradúcelo al idioma que aprendes y escúchalo",
+                "de": "In deine Lernsprache übersetzen und anhören",
+                "fr": "Traduit dans la langue apprise et lit à voix haute"
+            },
+            "steps": [
+                {
+                    "type": "text"
+                },
+                {
+                    "type": "translate",
+                    "to": "learn"
+                },
+                {
+                    "type": "speak"
+                }
+            ]
+        },
+        {
+            "dev": true,
             "type": "prompt",
             "group": "ai",
             "id": "summarize-points",
