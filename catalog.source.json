@@ -1,38 +1,126 @@
 {
     "baseUrl": "https://forzys.github.io/gistbit-mini",
     "groups": [
-        { "id": "translate", "title": { "zh": "翻译", "en": "Translate", "ko": "번역", "ja": "翻訳", "es": "Traducir", "de": "Übersetzen", "fr": "Traduire" } },
-        { "id": "recognize", "title": { "zh": "识别", "en": "Recognize", "ko": "인식", "ja": "認識", "es": "Reconocer", "de": "Erkennen", "fr": "Reconnaître" } },
-        { "id": "ai", "title": { "zh": "AI", "en": "AI", "ko": "AI", "ja": "AI", "es": "IA", "de": "KI", "fr": "IA" } },
-        { "id": "learn", "title": { "zh": "学习", "en": "Learn", "ko": "학습", "ja": "学習", "es": "Aprender", "de": "Lernen", "fr": "Apprendre" } }
+        {
+            "id": "translate",
+            "title": {
+                "zh": "翻译",
+                "en": "Translate",
+                "ko": "번역",
+                "ja": "翻訳",
+                "es": "Traducir",
+                "de": "Übersetzen",
+                "fr": "Traduire"
+            }
+        },
+        {
+            "id": "recognize",
+            "title": {
+                "zh": "识别",
+                "en": "Recognize",
+                "ko": "인식",
+                "ja": "認識",
+                "es": "Reconocer",
+                "de": "Erkennen",
+                "fr": "Reconnaître"
+            }
+        },
+        {
+            "id": "ai",
+            "title": {
+                "zh": "AI",
+                "en": "AI",
+                "ko": "AI",
+                "ja": "AI",
+                "es": "IA",
+                "de": "KI",
+                "fr": "IA"
+            }
+        },
+        {
+            "id": "learn",
+            "title": {
+                "zh": "学习",
+                "en": "Learn",
+                "ko": "학습",
+                "ja": "学習",
+                "es": "Aprender",
+                "de": "Lernen",
+                "fr": "Apprendre"
+            }
+        }
     ],
     "tools": [
-        { "id": "translate", "type": "local", "group": "translate", "icon": "translate", "route": "/tools/translate" },
-        { "id": "documents", "type": "local", "group": "translate", "icon": "doc.text", "route": "/tools/documents" },
-        { "id": "scan", "type": "local", "group": "recognize", "icon": "doc.viewfinder", "route": "/tools/scan" },
-        { "id": "ocr", "type": "local", "group": "recognize", "icon": "text.viewfinder", "route": "/tools/ocr" },
-        { "id": "extract", "type": "local", "group": "recognize", "icon": "waveform.badge.plus", "route": "/tools/extract" },
-
+        {
+            "id": "translate",
+            "type": "local",
+            "group": "translate",
+            "icon": "translate",
+            "route": "/tools/translate"
+        },
+        {
+            "id": "documents",
+            "type": "local",
+            "group": "translate",
+            "icon": "doc.text",
+            "route": "/tools/documents"
+        },
+        {
+            "id": "scan",
+            "type": "local",
+            "group": "recognize",
+            "icon": "doc.viewfinder",
+            "route": "/tools/scan"
+        },
+        {
+            "id": "ocr",
+            "type": "local",
+            "group": "recognize",
+            "icon": "text.viewfinder",
+            "route": "/tools/ocr"
+        },
+        {
+            "id": "extract",
+            "type": "local",
+            "group": "recognize",
+            "icon": "waveform.badge.plus",
+            "route": "/tools/extract"
+        },
         {
             "dev": true,
             "id": "dev-polish-email",
             "type": "prompt",
             "group": "ai",
             "icon": "envelope",
-            "title": { "zh": "邮件润色（测试）", "en": "Polish Email (Test)" },
+            "title": {
+                "zh": "邮件润色（测试）",
+                "en": "Polish Email (Test)"
+            },
             "input": "text",
             "output": "text",
             "prompt": "把下面的内容改写成礼貌、简洁的邮件，用{{language}}：\n{{input}}"
         },
-        { "dev": true, "id": "hello", "type": "mini", "group": "learn", "source": "minis/hello" },
+        {
+            "dev": true,
+            "id": "hello",
+            "type": "mini",
+            "group": "learn",
+            "source": "minis/hello"
+        },
         {
             "dev": true,
             "id": "sample-wordbook",
             "type": "pack",
             "group": "learn",
             "source": "packs/sample-wordbook.json",
-            "title": { "zh": "生物学词汇（示例）", "en": "Biology Words (Sample)" },
-            "description": { "zh": "12 个高中生物常用词，测试下载的词书用。", "en": "12 common biology words for testing downloaded wordbooks." }
+            "title": {
+                "zh": "生物学词汇（示例）",
+                "en": "Biology Words (Sample)"
+            },
+            "description": {
+                "zh": "12 个高中生物常用词，测试下载的词书用。",
+                "en": "12 common biology words for testing downloaded wordbooks."
+            }
         },
         {
             "dev": true,
@@ -40,8 +128,57 @@
             "type": "pack",
             "group": "learn",
             "source": "packs/sample-terms.json",
-            "title": { "zh": "技术术语（示例）", "en": "Tech Terms (Sample)" },
-            "description": { "zh": "5 个常被识别错的技术名词，测试术语导入用。", "en": "5 tech terms often misrecognized, for testing term import." }
+            "title": {
+                "zh": "技术术语（示例）",
+                "en": "Tech Terms (Sample)"
+            },
+            "description": {
+                "zh": "5 个常被识别错的技术名词，测试术语导入用。",
+                "en": "5 tech terms often misrecognized, for testing term import."
+            }
+        },
+        {
+            "dev": true,
+            "id": "dev-test-event",
+            "type": "event",
+            "icon": "flag",
+            "title": {
+                "zh": "测试活动",
+                "en": "Test Event"
+            },
+            "banner": {
+                "zh": "测试活动：点开看看网页容器",
+                "en": "Test event: open to try the web container"
+            },
+            "url": "https://www.wikipedia.org/",
+            "expiresAt": "2026-12-31T23:59:59Z"
+        },
+        {
+            "dev": true,
+            "id": "dev-test-feeds",
+            "type": "feeds",
+            "group": "learn",
+            "icon": "dot.radiowaves.left.and.right",
+            "title": {
+                "zh": "测试合集",
+                "en": "Test Feeds"
+            },
+            "description": {
+                "zh": "开发版测试用：BBC 6 Minute English、Planet Money、Hacker News",
+                "en": "Dev test: BBC 6 Minute English, Planet Money, Hacker News"
+            },
+            "language": "en-US",
+            "feeds": [
+                {
+                    "url": "https://podcasts.files.bbci.co.uk/p02pc9tn.rss"
+                },
+                {
+                    "url": "https://feeds.npr.org/510289/podcast.xml"
+                },
+                {
+                    "url": "https://hnrss.org/frontpage"
+                }
+            ]
         }
     ]
 }
