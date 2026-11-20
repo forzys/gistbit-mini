@@ -1,7 +1,7 @@
 /* 颜色、圆角、字体都用知点注入的变量（--gistbit-*），跟着主题和深浅色变。
    元素分类用格子顶部一条细色条区分，不铺满色块。
-   整页不滚动：顶部固定，下面的内容区上下滚动（有惯性和回弹）；周期表在内容区里只左右滑。
-   横、竖分给两个滚动区域，手势按起手方向交给其中一个（和原生的嵌套滚动一样），不会斜着走 */
+   上下滚动交给整页（WKWebView 自己的原生滚动，惯性、回弹都是系统的），顶部搜索栏固定，内容从下面滚过；
+   周期表单独一个只左右滑的区域。横、竖分给两个滚动区域，手势按起手方向交给其中一个，不会斜着走 */
 :root {
     color-scheme: light dark;
     --cell-w: 48px;
@@ -23,15 +23,11 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
-html,
 body {
-    height: 100%;
-    overflow: hidden;
-}
-body {
-    display: flex;
-    flex-direction: column;
     margin: 0;
+    /* 给固定的顶部让出位置；高度由 app.js 按实际量出来写进 --top-height */
+    padding-top: var(--top-height, 100px);
+    padding-bottom: env(safe-area-inset-bottom);
     background: var(--gistbit-background);
     color: var(--gistbit-text);
     font-family: var(--gistbit-font), -apple-system, sans-serif;
@@ -49,7 +45,11 @@ button {
 
 /* ---------- 顶部：搜索 + 分段 ---------- */
 .top {
-    flex: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -96,15 +96,6 @@ button {
 }
 .top.searching .segmented {
     display: none;
-}
-
-/* ---------- 内容区：上下滚动 ---------- */
-main {
-    flex: 1;
-    min-height: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ---------- 周期表：只左右滑 ---------- */

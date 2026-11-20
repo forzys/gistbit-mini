@@ -324,6 +324,14 @@
 
     // ---------- 启动 ----------
 
+    // 固定的顶部有多高，正文就往下让多少（字体、语言变了高度会变）
+    var top = document.querySelector(".top")
+    var syncTopHeight = function () {
+        document.body.style.setProperty("--top-height", top.offsetHeight + "px")
+    }
+    if (window.ResizeObserver) new ResizeObserver(syncTopHeight).observe(top)
+    syncTopHeight()
+
     $("search").addEventListener("input", renderAll)
     $("tabs").addEventListener("click", function (event) {
         var target = event.target.closest("button")
